@@ -17,12 +17,10 @@ async function getFile() {
 getFile().then(data => {
     myData = (data.toString());
     myData = (myData.split('\n'));
-    console.log(myData[0]);
     let intList = [];
     for (i of myData) {
         intList.push(Number(i));
     }
-    console.log(intList);
     async function searchList() {
         for (i=0; i< intList.length; i++) {
             seenFrequencies.push(currentFrequency);
