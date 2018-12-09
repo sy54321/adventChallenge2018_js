@@ -3,8 +3,8 @@ const util = require('util');
 // Convert fs.readFile into Promise version of same    
 const readFile = util.promisify(fs.readFile);
 let fileName = 'dataDay2.txt';
-let twoSameLetterBoxIds = 0;
-let threeSameLetterBoxIds = 0;
+let twoSameLetterBoxIds = []
+let threeSameLetterBoxIds = []
 async function getFile() {
     return await readFile(fileName);
 }
@@ -24,14 +24,14 @@ getFile().then(data => {
             foundLetterCount[myLetters.search(boxId[i])] += 1;
         }
         if (foundLetterCount.includes(2)) {
-            twoSameLetterBoxIds += 1;
+            twoSameLetterBoxIds.push(boxId)
         }
         if (foundLetterCount.includes(3)) {
-            threeSameLetterBoxIds += 1;
+            threeSameLetterBoxIds.push(boxId)
         }
     }
-    console.log(`Box IDs with two of the same letter: ${twoSameLetterBoxIds}`)
-    console.log(`Box IDs with three of the same letter: ${threeSameLetterBoxIds}`)
-    checksum = twoSameLetterBoxIds * threeSameLetterBoxIds;
+    console.log(`Box IDs with two of the same letter: ${twoSameLetterBoxIds.length}`)
+    console.log(`Box IDs with three of the same letter: ${threeSameLetterBoxIds.length}`)
+    checksum = twoSameLetterBoxIds.length * threeSameLetterBoxIds.length;
     console.log(`The checksum is: ${checksum}\nThe program is finished.`);
 });
